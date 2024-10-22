@@ -1,0 +1,15 @@
+services:
+  php:
+    build:
+      context: ./.docker/php
+    volumes:
+      - ./:/usr/src/app
+  nginx:
+    build:
+      context: ./.docker/nginx
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "80:80"
+    depends_on:
+      - php
