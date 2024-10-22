@@ -21,7 +21,7 @@ Open a terminal and run their following commands:
 
 ```shell script
 $ composer install
-$ yarn install
+$ npm install
 $ yarn encore dev
 ```
 

@@ -9,3 +9,6 @@ down:
 
 bash:
 	docker compose -f docker-compose.local.yml exec -it php bash
+
+root:
+	docker compose -f docker-compose.local.yml exec -it --user root php bash

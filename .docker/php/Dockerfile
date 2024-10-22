@@ -24,7 +24,7 @@ RUN pecl install pcov && docker-php-ext-enable pcov
 RUN sed -i 's/www-data:x:33:33/www-data:x:1000:1000/' /etc/passwd && \
     sed -i 's/www-data:x:33:/www-data:x:1000:/' /etc/group
 
-RUN apt-get remove -y cmdtest
+RUN apt remove cmdtest
 
 COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
@@ -36,6 +36,10 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 
 RUN apt-get install -y yarn
 
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+
 RUN chown -R www-data: /var/www/
 
 WORKDIR /usr/src/app
+
+USER www-data
