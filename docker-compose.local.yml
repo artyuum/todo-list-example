@@ -13,3 +13,36 @@ services:
       - "80:80"
     depends_on:
       - php
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - 4440:4444
+    volumes:
+      - /dev/shm:/dev/shm
+
+  firefox:
+    image: selenium/standalone-firefox
+    ports:
+      - 4441:4444
+    volumes:
+      - /dev/shm:/dev/shm
+
+  opera:
+    image: selenium/standalone-opera
+    ports:
+      - 4442:4444
+    volumes:
+      - /dev/shm:/dev/shm
+
+  edge:
+    image: selenium/standalone-edge
+    ports:
+      - 4443:4444
+    volumes:
+      - /dev/shm:/dev/shm
+  db:
+    image: mariadb:10.3
+    environment:
+      MYSQL_ROOT_PASSWORD: nopassword
+    ports:
+      - '3311:3306'

@@ -24,10 +24,18 @@ RUN pecl install pcov && docker-php-ext-enable pcov
 RUN sed -i 's/www-data:x:33:33/www-data:x:1000:1000/' /etc/passwd && \
     sed -i 's/www-data:x:33:/www-data:x:1000:/' /etc/group
 
+RUN apt-get remove -y cmdtest
+
 COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+RUN apt-get install -y yarn
 
 RUN chown -R www-data: /var/www/
 
 WORKDIR /usr/src/app
-
-USER www-data
