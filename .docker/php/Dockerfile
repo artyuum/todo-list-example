@@ -24,7 +24,7 @@ RUN pecl install pcov && docker-php-ext-enable pcov
 RUN sed -i 's/www-data:x:33:33/www-data:x:1000:1000/' /etc/passwd && \
     sed -i 's/www-data:x:33:/www-data:x:1000:/' /etc/group
 
-COPY --from=composer:lts /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
 RUN chown -R www-data: /var/www/
 
